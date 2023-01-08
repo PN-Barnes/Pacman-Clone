@@ -4,6 +4,9 @@ const canvasContext = canvas.getContext('2d');
 let fps = 30;
 let oneBlockSize = 20;
 let borderColor = '#0900FF';
+let wallSpaceWidth = oneBlockSize / 1.5;
+let wallOffSet = (oneBlockSize - wallSpaceWidth) / 2;
+wallInnerColor = 'black';
 const pacmanFrames = document.getElementById('pacmanAnimation');
 const ghostFrames = document.getElementById('ghosts');
 
@@ -65,6 +68,42 @@ let drawBorders = () => {
           oneBlockSize,
           borderColor
         );
+        if (j > 0 && map[i][j - 1] == 1) {
+          createRect(
+            j * oneBlockSize,
+            i * oneBlockSize + wallOffSet,
+            wallSpaceWidth + wallOffSet,
+            wallSpaceWidth,
+            wallInnerColor
+          );
+        }
+        if (j < map[0].length - 1 && map[i][j + 1] == 1) {
+          createRect(
+            j * oneBlockSize + wallOffSet,
+            i * oneBlockSize + wallOffSet,
+            wallSpaceWidth + wallOffSet,
+            wallSpaceWidth,
+            wallInnerColor
+          );
+        }
+        if (i > 0 && map[i - 1][j] == 1) {
+          createRect(
+            j * oneBlockSize + wallOffSet,
+            i * oneBlockSize,
+            wallSpaceWidth,
+            wallSpaceWidth + wallOffSet,
+            wallInnerColor
+          );
+        }
+        if (i < map.length - 1 && map[i + 1][j] == 1) {
+          createRect(
+            j * oneBlockSize + wallOffSet,
+            i * oneBlockSize + wallOffSet,
+            wallSpaceWidth,
+            wallSpaceWidth + wallOffSet,
+            wallInnerColor
+          );
+        }
       }
     }
   }
